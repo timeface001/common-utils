@@ -250,6 +250,14 @@ public class OkHttpUtil {
         enqueue(request, responseCallback);
     }
 
+    public static void addInterceptor(Interceptor e) {
+        okHttpClient.interceptors().add(e);
+    }
+
+    public static void removeInterceptor(Interceptor e) {
+        okHttpClient.interceptors().remove(e);
+    }
+
     /**
      * 通用同步请求。
      *

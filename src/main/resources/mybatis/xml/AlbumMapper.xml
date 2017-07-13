@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fs.dreams.mapper.AlbumMapper" >
+  <resultMap id="BaseResultMap" type="com.fs.dreams.Album" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="src_id" property="srcId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="TINYINT" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="sub_type" property="subType" jdbcType="VARCHAR" />
+    <result column="comment_thread_id" property="commentThreadId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, src_id, type, size, company, pic_url, publish_time, description, sub_type, 
+    comment_thread_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from album
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from album
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fs.dreams.Album" >
+    insert into album (id, name, src_id, 
+      type, size, company, 
+      pic_url, publish_time, description, 
+      sub_type, comment_thread_id, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{srcId,jdbcType=BIGINT}, 
+      #{type,jdbcType=VARCHAR}, #{size,jdbcType=TINYINT}, #{company,jdbcType=VARCHAR}, 
+      #{picUrl,jdbcType=VARCHAR}, #{publishTime,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{subType,jdbcType=VARCHAR}, #{commentThreadId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fs.dreams.Album" >
+    insert into album
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="srcId != null" >
+        src_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="subType != null" >
+        sub_type,
+      </if>
+      <if test="commentThreadId != null" >
+        comment_thread_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="srcId != null" >
+        #{srcId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=TINYINT},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="subType != null" >
+        #{subType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentThreadId != null" >
+        #{commentThreadId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fs.dreams.Album" >
+    update album
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="srcId != null" >
+        src_id = #{srcId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=TINYINT},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="subType != null" >
+        sub_type = #{subType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentThreadId != null" >
+        comment_thread_id = #{commentThreadId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fs.dreams.Album" >
+    update album
+    set name = #{name,jdbcType=VARCHAR},
+      src_id = #{srcId,jdbcType=BIGINT},
+      type = #{type,jdbcType=VARCHAR},
+      size = #{size,jdbcType=TINYINT},
+      company = #{company,jdbcType=VARCHAR},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      sub_type = #{subType,jdbcType=VARCHAR},
+      comment_thread_id = #{commentThreadId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

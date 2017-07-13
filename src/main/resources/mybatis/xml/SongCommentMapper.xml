@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fs.dreams.mapper.SongCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.fs.dreams.SongComment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="song_id" property="songId" jdbcType="BIGINT" />
+    <result column="src_id" property="srcId" jdbcType="BIGINT" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="user_src_id" property="userSrcId" jdbcType="BIGINT" />
+    <result column="user_avatar" property="userAvatar" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fs.dreams.SongComment" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, song_id, src_id, count, user_nickname, user_src_id, user_avatar, publish_time, 
+    create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from song_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from song_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fs.dreams.SongComment" >
+    insert into song_comment (id, song_id, src_id, 
+      count, user_nickname, user_src_id, 
+      user_avatar, publish_time, create_time, 
+      content)
+    values (#{id,jdbcType=BIGINT}, #{songId,jdbcType=BIGINT}, #{srcId,jdbcType=BIGINT}, 
+      #{count,jdbcType=INTEGER}, #{userNickname,jdbcType=VARCHAR}, #{userSrcId,jdbcType=BIGINT}, 
+      #{userAvatar,jdbcType=VARCHAR}, #{publishTime,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fs.dreams.SongComment" >
+    insert into song_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="songId != null" >
+        song_id,
+      </if>
+      <if test="srcId != null" >
+        src_id,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="userNickname != null" >
+        user_nickname,
+      </if>
+      <if test="userSrcId != null" >
+        user_src_id,
+      </if>
+      <if test="userAvatar != null" >
+        user_avatar,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="songId != null" >
+        #{songId,jdbcType=BIGINT},
+      </if>
+      <if test="srcId != null" >
+        #{srcId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="userNickname != null" >
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userSrcId != null" >
+        #{userSrcId,jdbcType=BIGINT},
+      </if>
+      <if test="userAvatar != null" >
+        #{userAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fs.dreams.SongComment" >
+    update song_comment
+    <set >
+      <if test="songId != null" >
+        song_id = #{songId,jdbcType=BIGINT},
+      </if>
+      <if test="srcId != null" >
+        src_id = #{srcId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="userNickname != null" >
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userSrcId != null" >
+        user_src_id = #{userSrcId,jdbcType=BIGINT},
+      </if>
+      <if test="userAvatar != null" >
+        user_avatar = #{userAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fs.dreams.SongComment" >
+    update song_comment
+    set song_id = #{songId,jdbcType=BIGINT},
+      src_id = #{srcId,jdbcType=BIGINT},
+      count = #{count,jdbcType=INTEGER},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_src_id = #{userSrcId,jdbcType=BIGINT},
+      user_avatar = #{userAvatar,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fs.dreams.SongComment" >
+    update song_comment
+    set song_id = #{songId,jdbcType=BIGINT},
+      src_id = #{srcId,jdbcType=BIGINT},
+      count = #{count,jdbcType=INTEGER},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_src_id = #{userSrcId,jdbcType=BIGINT},
+      user_avatar = #{userAvatar,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
